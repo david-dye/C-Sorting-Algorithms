@@ -7,30 +7,29 @@ namespace C_Sharp_Test_Shell_Sort
         static void Main()
         {
             //Create an array of unsorted integers
-            int[] unsorted = new int[100];
+            int[] unsorted = new int[1000];
             for (int i = 0; i < unsorted.Length; i++)
             {
                 Random rand = new Random();
-                unsorted[i] = rand.Next(0, 100);
+                unsorted[i] = rand.Next(0, 1000);
             }
 
-            //Creates a Shellsort object that can sort integer arrays
-            Shellsort shellSorter = new Shellsort();
+            //Creates a sort object from a sorting class that can sort integer arrays
+            QuickSort sorter = new QuickSort();
 
             //sort the unsorted array
-            int[] sorted = shellSorter.Sort(unsorted);
+            int[] sorted = sorter.Sort(unsorted);
 
-            //Write the before and after sorted arrays
-            Console.Write("\n\n Before Sort:\n");
-            foreach(int num in unsorted)
+            if(sorter.CheckSorted(sorted))
             {
-                Console.WriteLine(" " + num);
+                Console.WriteLine("The array is sorted correctly");
             }
-            Console.Write("\n\n After Sort:\n");
-            foreach (int num in sorted)
+            else
             {
-                Console.WriteLine(" " + num);
+                Console.WriteLine("The array is NOT sorted correctly");
             }
+
+            Console.WriteLine("\nComparisons: " + sorter.Comparisons);
         }
     }
 }

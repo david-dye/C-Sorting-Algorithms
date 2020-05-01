@@ -4,24 +4,29 @@ using System.Text;
 
 namespace C_Sharp_Test_Shell_Sort
 {
-    class Shellsort : ISort //Shellsort uses the ISort interface
+    class Shellsort : SortCLS, ISort //Shellsort uses the ISort interface
     {
         public int[] Sort(int[] array)
         {
             //Use the private class method to make an array of gaps
             int[] gaps = CreateGaps(array);
             int[] newArray = new int[array.Length];
+            //make a replica of given array
             array.CopyTo(newArray, 0);
+            //go through each gap, which gets smaller each iteration
             foreach(int gap in gaps)
             {
                 for(int i = gap; i < newArray.Length; i++)
                 {
                     int temp = newArray[i];
                     int j;
+                    //go through the array, and for every value that is bigger than the temp variable gets swapped with the temp variable
                     for(j = i; j >= gap && temp < newArray[j-gap]; j-=gap)
                     {
+                        Comparisons++;
                         newArray[j] = newArray[j - gap];
                     }
+                    //the new temp variable is the one that we switched with
                     newArray[j] = temp;
                 }
             }
